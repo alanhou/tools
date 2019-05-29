@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from bypy import ByPy
 import os, sys
 import datetime
