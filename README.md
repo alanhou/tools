@@ -21,5 +21,5 @@ MySQL备份上传
 ```
 chmod +x baidu.py
 # crontab -e
-0 2 * * * /usr/bin/python /path/to/baidu.py
+0 2 * * * /usr/bin/python /path/to/baidu.py >/dev/null 2>&1
 ```
