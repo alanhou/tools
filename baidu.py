@@ -95,19 +95,25 @@ class BackupToBaidu:
         print("\nupload ok")
 
 class AllBackup:
-
+    
     def mysqlBackup(self):
         backup_time = time.strftime('%Y%m%d-%H%M%S')
         for db_name in CONFIG['db_name']:
-            backup_file = "/tmp/" + db_name + backup_time + ".sql"
-            dumpcmd = "mysqldump -u " + CONFIG['db_user'] + " -p" + CONFIG['db_passwd'] + " " + db_name + " > " + backup_file
+            backup_sql = "/tmp/" + db_name + backup_time + ".sql"
+            dumpcmd = "mysqldump -u " + CONFIG['db_user'] + " -p" + CONFIG['db_passwd'] + " " + db_name + " > " + backup_sql
             os.system(dumpcmd)
-            print("Dump of "+ backup_file +" completed")
+            print("Dump of "+ backup_sql +" completed")
+            backup_file = "/tmp/" + db_name + backup_time + ".tar.gz"
+            with tarfile.open(backup_file, "w:gz") as tar:
+                tar.add(backup_sql, arcname=os.path.basename(backup_sql))
+            tar.close()
 
             backup = BackupToBaidu()
             backup.uploadFiles(backup_file)
-            print("正在删除文件：" + backup_file)
-            os.system("rm -f " + backup_file)
+            print("正在删除文件：" + backup_sql)
+            os.system("rm -f " + backup_sql)
+            print("正在删除文件：" + backup_file)            
+            os.system("rm -f " + backup_file)            
 
 
 
