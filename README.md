@@ -21,5 +21,12 @@ MySQL备份上传
 ```
 chmod +x baidu.py
 # crontab -e
-0 2 * * * /usr/bin/python /path/to/baidu.py >/dev/null 2>&1
+0 2 * * * /usr/bin/python /path/to/baidu.py
+```
+
+2. Nginx日志切割脚本示例文件： nginxLogRotate.sh
+
+```
+# vi /etc/crontab或 crontab -e
+0 0 * * * root /usr/local/nginx/logs/nginxLogRotate.sh
 ```
