@@ -30,3 +30,7 @@ chmod +x baidu.py
 # vi /etc/crontab或 crontab -e
 0 0 * * * root /usr/local/nginx/logs/nginxLogRotate.sh
 ```
+
+3. fake_useragent_0.1.11.json
+
+对https://fake-useragent.herokuapp.com/browsers/0.1.11 文件一个备份
