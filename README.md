@@ -34,3 +34,13 @@ chmod +x baidu.py
 3. fake_useragent_0.1.11.json
 
 对https://fake-useragent.herokuapp.com/browsers/0.1.11 文件一个备份
+
+
+# 常见问题
+
+1.  Max retries exceeded with url: /houtianze/bypy/master/update/update.json
+
+```
+pip install pyopenssl
+```
+
