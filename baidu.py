@@ -7,6 +7,7 @@ import datetime, time
 '''
 1、安装 ByPy：pip install bypy
 2、授权：bypy info
+3、解决报错: pip install pyopenssl
 '''
 
 CONFIG = {
@@ -94,6 +95,30 @@ class BackupToBaidu:
         print("花费时间(s)：" + str((end - start).seconds))
         print("\nupload ok")
 
+class BackupToAWS:
+
+    aws_key = 'xxx'
+    aws_secret = 'xxx'
+    backet_name = 'xxx'
+    region_name = "us-west-1"
+
+    def upload_to_s3(self, file_path):
+        _, file_name = os.path.split(file_path)
+        session = Session(
+            aws_access_key_id=self.aws_key,
+            aws_secret_access_key=self.aws_secret,
+            region_name = self.region_name)
+
+        s3 = session.resource("s3")
+        client = session.client("s3")
+        bucket = self.backet_name
+        upload_data = open(file_path, "rb")
+        upload_key = file_name
+        file_obj = s3.Bucket(bucket).put_object(Key=upload_key, Body=upload_data)
+
+
+
+
 class AllBackup:
     
     def mysqlBackup(self):
@@ -110,6 +135,9 @@ class AllBackup:
 
             backup = BackupToBaidu()
             backup.uploadFiles(backup_file)
+
+            backup_aws = BackupToAWS()
+            backup_aws.upload_to_s3(backup_file)
             print("正在删除文件：" + backup_sql)
             os.system("rm -f " + backup_sql)
             print("正在删除文件：" + backup_file)            
