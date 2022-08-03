@@ -35,6 +35,15 @@ chmod +x baidu.py
 
 对https://fake-useragent.herokuapp.com/browsers/0.1.11 文件一个备份
 
+4. 数据库直转Protobuf 文件
+
+```
+cd sql2db
+go mod tidy
+go run main.go > xxx.proto
+```
+
+   
 
 # 常见问题
 
